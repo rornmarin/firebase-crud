@@ -17,16 +17,19 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        return android;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for android - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -49,22 +52,13 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBF4HUiNvXZA4iAib5w4v2u-KGvJzklQOA',
-    appId: '1:820410646061:android:350b432a5e8905c45182a4',
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyBCaYZnEwoQhCXR8HcaYY8xnw9dcd4pHrk',
+    appId: '1:820410646061:web:2bb046f09a66c6b35182a4',
     messagingSenderId: '820410646061',
     projectId: 'fir-test-b95b7',
+    authDomain: 'fir-test-b95b7.firebaseapp.com',
     storageBucket: 'fir-test-b95b7.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA-DoRJGwmayUn2Ql_ldZx7vqToYw-Gp_g',
-    appId: '1:820410646061:ios:f2ab9ecde98db25e5182a4',
-    messagingSenderId: '820410646061',
-    projectId: 'fir-test-b95b7',
-    storageBucket: 'fir-test-b95b7.appspot.com',
-    iosClientId:
-        '820410646061-13gqtobfd7qtr7n3fnv4quvbu54pp89j.apps.googleusercontent.com',
-    iosBundleId: 'com.example.firebaseTest',
+    measurementId: 'G-ZYL662J2WD',
   );
 }
