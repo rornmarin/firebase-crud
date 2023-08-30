@@ -1,11 +1,30 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_test/components/my_textfile.dart';
 import 'package:flutter/material.dart';
 
-class AddUser extends StatelessWidget {
-  AddUser({super.key});
+class AddUser extends StatefulWidget {
+  const AddUser({super.key});
 
+  @override
+  State<AddUser> createState() => _AddUserState();
+}
+
+class _AddUserState extends State<AddUser> {
+  final CollectionReference itemsCollection =
+      FirebaseFirestore.instance.collection('items');
   final userNameController = TextEditingController();
+
   final positionController = TextEditingController();
+
+  Future<void> addItem(String? name, String? position) {
+    // Example item data
+    Map<String, dynamic> itemData = {
+      'name': name,
+      'position': position,
+    };
+
+    return itemsCollection.add(itemData);
+  }
 
   @override
   Widget build(BuildContext context) {
