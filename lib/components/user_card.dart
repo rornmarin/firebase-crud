@@ -1,3 +1,5 @@
+import 'package:firebase_test/add_user.dart';
+import 'package:firebase_test/edit_user.dart';
 import 'package:flutter/material.dart';
 
 class UserCard extends StatelessWidget {
@@ -32,14 +34,23 @@ class UserCard extends StatelessWidget {
             width: 110,
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => EditUser()),
+              );
+            },
             child: const Icon(
               Icons.edit,
               color: Colors.blue,
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(const SnackBar(content: Text("Data Deleted")));
+            },
             child: const Icon(
               Icons.delete,
               color: Colors.red,

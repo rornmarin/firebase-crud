@@ -59,24 +59,44 @@ class AddUser extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(
-                  style: TextButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.green.shade700,
-                      textStyle: const TextStyle(fontSize: 15)),
-                  onPressed: () async {},
-                  child: const Text("Add"),
+                GestureDetector(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    decoration: BoxDecoration(
+                        color: Colors.green.shade700,
+                        borderRadius: BorderRadius.circular(8)),
+                    child: const Center(
+                      child: Text(
+                        "Save",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(
-                  width: 20,
+                  width: 10,
                 ),
-                TextButton(
-                  style: TextButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.red,
-                      textStyle: const TextStyle(fontSize: 15)),
-                  onPressed: () async {},
-                  child: const Text("Clear"),
+                GestureDetector(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(8)),
+                    child: const Center(
+                      child: Text(
+                        "Clear",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
