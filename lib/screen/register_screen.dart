@@ -75,8 +75,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           label: "Sign IN",
                           onTap: () {
                             authCon.signUpUser(
-                                email: "diya.dev@gmail.com",
-                                password: "1234567");
+                                email: emailcontroller.text,
+                                password: passwordcontroller.text);
                           },
                         ),
                         const SizedBox(
@@ -143,7 +143,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (BuildContext context) {
-                                    return LoginPage();
+                                    return const LoginPage();
                                   }),
                                 );
                               },

@@ -19,7 +19,7 @@ class AuthController extends GetxController {
               '------------------ hashcode - ${respone.credential.hashCode.toString()}');
           Get.snackbar('Sucessfully!', 'You sign up sucessfully',
               colorText: Colors.white, backgroundColor: Colors.green);
-          Get.offAll(() => LoginPage());
+          Get.offAll(() => const LoginPage());
         }
       });
     } catch (message) {
@@ -56,7 +56,7 @@ class AuthController extends GetxController {
   //!checkUser
   checkUser() {
     if (FirebaseAuth.instance.currentUser?.uid == null) {
-      Get.offAll(() => LoginPage());
+      Get.offAll(() => const LoginPage());
     } else {
       Get.offAll(() => const HomeScreen());
     }
@@ -67,7 +67,7 @@ class AuthController extends GetxController {
     final auth = FirebaseAuth.instance;
     await auth.signOut().then(
           (value) => Get.offAll(
-            () => LoginPage(),
+            () => const LoginPage(),
           ),
         );
   }

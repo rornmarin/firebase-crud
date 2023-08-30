@@ -3,17 +3,24 @@ import 'package:firebase_test/components/square_title.dart';
 import 'package:firebase_test/screen/homescreen.dart';
 import 'package:firebase_test/screen/register_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../components/my_button.dart';
+import '../controller/auth_controller.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
-  final userController = TextEditingController();
-  final passwordController = TextEditingController();
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController emailcontroller = TextEditingController();
+  TextEditingController passwordcontroller = TextEditingController();
+  final authCon = Get.put(AuthController());
 
   // void signUserIn() {}
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,15 +49,21 @@ class LoginPage extends StatelessWidget {
                   height: 10,
                 ),
                 MytextFile(
-                    controller: userController,
+                    onchanged: (p0) {
+                      debugPrint("----------->> Email: $p0");
+                    },
+                    controller: emailcontroller,
                     hintText: "Username",
                     obscursText: false),
                 const SizedBox(
                   height: 10,
                 ),
                 MytextFile(
-                    controller: passwordController,
-                    hintText: "Pass word",
+                    onchanged: (p0) {
+                      debugPrint("----------->> Password: $p0");
+                    },
+                    controller: passwordcontroller,
+                    hintText: "Password",
                     obscursText: true),
                 const SizedBox(
                   height: 10,
@@ -70,11 +83,9 @@ class LoginPage extends StatelessWidget {
                 Mybutton(
                   label: "Login",
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (BuildContext context) {
-                        return const HomeScreen();
-                      }),
+                    authCon.signInUser(
+                      email: emailcontroller.text,
+                      password: passwordcontroller.text,
                     );
                   },
                 ),
@@ -140,7 +151,7 @@ class LoginPage extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return RegisterScreen();
+                              return const RegisterScreen();
                             },
                           ),
                         );
