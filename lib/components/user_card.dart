@@ -1,5 +1,5 @@
-import 'package:firebase_test/add_user.dart';
-import 'package:firebase_test/edit_user.dart';
+import 'package:firebase_test/screen/add_user.dart';
+import 'package:firebase_test/screen/edit_user.dart';
 import 'package:flutter/material.dart';
 
 class UserCard extends StatelessWidget {

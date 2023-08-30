@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'loginpage.dart';
+import 'package:get/get.dart';
+import 'screen/loginpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(

@@ -1,4 +1,4 @@
-import 'package:firebase_test/add_user.dart';
+import 'package:firebase_test/screen/add_user.dart';
 import 'package:firebase_test/components/user_card.dart';
 import 'package:flutter/material.dart';
 
