@@ -22,58 +22,70 @@ class UserCard extends StatefulWidget {
 class _UserCardState extends State<UserCard> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(10),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      decoration: BoxDecoration(
-          color: Colors.grey[200], borderRadius: BorderRadius.circular(8)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          const Icon(Icons.person),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "${widget.label}",
-                style: const TextStyle(fontWeight: FontWeight.bold),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Container(
+        // margin: const EdgeInsets.all(10),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        decoration: BoxDecoration(
+            color: Colors.grey[200], borderRadius: BorderRadius.circular(8)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            const Icon(Icons.person),
+            const SizedBox(
+              width: 15,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 150),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "${widget.label}",
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    "${widget.des}",
+                    style: TextStyle(color: Colors.grey[500]),
+                  )
+                ],
               ),
-              Text(
-                "${widget.des}",
-                style: TextStyle(color: Colors.grey[500]),
-              )
-            ],
-          ),
-          const SizedBox(
-            width: 110,
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      EditUser(documentSnapshot: widget.documentSnapshot),
-                ),
-              );
-            },
-            child: const Icon(
-              Icons.edit,
-              color: Colors.blue,
             ),
-          ),
-          GestureDetector(
-            onTap: () async {
-              await itemDelete(widget.documentSnapshot.id);
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(const SnackBar(content: Text("Data Deleted")));
-            },
-            child: const Icon(
-              Icons.delete,
-              color: Colors.red,
+            // const SizedBox(
+            //   width: 110,
+            // ),
+            IconButton(
+              icon: const Icon(
+                Icons.edit,
+                color: Colors.blue,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        EditUser(documentSnapshot: widget.documentSnapshot),
+                  ),
+                );
+              },
             ),
-          ),
-        ],
+            IconButton(
+              icon: const Icon(
+                Icons.delete,
+                color: Colors.red,
+              ),
+              onPressed: () async {
+                await itemDelete(widget.documentSnapshot.id);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("Data Deleted"),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

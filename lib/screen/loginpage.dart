@@ -1,6 +1,5 @@
 import 'package:firebase_test/components/my_textfile.dart';
 import 'package:firebase_test/components/square_title.dart';
-import 'package:firebase_test/screen/homescreen.dart';
 import 'package:firebase_test/screen/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -53,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                       debugPrint("----------->> Email: $p0");
                     },
                     controller: emailcontroller,
-                    hintText: "Username",
+                    hintText: "Username or Email",
                     obscursText: false),
                 const SizedBox(
                   height: 10,
@@ -68,11 +67,11 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 10,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
+                    children: [
                       Text("Forgot password?"),
                     ],
                   ),
@@ -121,9 +120,9 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 50,
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     SquareTitle(imagePath: 'assets/images/apple.png'),
                     SizedBox(
                       width: 25,

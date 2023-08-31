@@ -22,7 +22,7 @@ class _AddUserState extends State<AddUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green.shade700,
+        backgroundColor: Colors.blue.shade800,
         title: const Text(
           "Add User",
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -84,7 +84,7 @@ class _AddUserState extends State<AddUser> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 10),
                     decoration: BoxDecoration(
-                        color: Colors.green.shade700,
+                        color: Colors.blue.shade800,
                         borderRadius: BorderRadius.circular(8)),
                     child: const Center(
                       child: Text(

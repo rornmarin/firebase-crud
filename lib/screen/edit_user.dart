@@ -8,6 +8,7 @@ import 'package:firebase_test/components/my_textfile.dart';
 
 class EditUser extends StatelessWidget {
   final DocumentSnapshot documentSnapshot;
+  //  final List<DocumentSnapshot> documnents = snapshot.data!.docs;
 
   EditUser({
     Key? key,
@@ -38,7 +39,8 @@ class EditUser extends StatelessWidget {
               onchanged: (p0) {
                 debugPrint("-------->Update Name: $p0");
               },
-              controller: userNameController,
+              // initail: '${doc.name}',
+              // controller: userNameController,
               hintText: "Name",
               obscursText: false),
           const SizedBox(
@@ -76,11 +78,14 @@ class EditUser extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () async {
                         await fireupdate();
-                        Navigator.push(context, MaterialPageRoute(
-                          builder: (context) {
-                            return const HomeScreen();
-                          },
-                        ));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const HomeScreen();
+                            },
+                          ),
+                        );
                       },
                       child: const Text(
                         "Update",
