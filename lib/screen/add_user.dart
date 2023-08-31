@@ -1,30 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_test/components/my_textfile.dart';
+import 'package:firebase_test/controller/data.dart';
+import 'package:firebase_test/screen/homescreen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AddUser extends StatefulWidget {
   const AddUser({super.key});
-
   @override
   State<AddUser> createState() => _AddUserState();
 }
 
 class _AddUserState extends State<AddUser> {
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController positioncontroller = TextEditingController();
+  final data = Get.put(DataController());
   final CollectionReference itemsCollection =
       FirebaseFirestore.instance.collection('items');
-  final userNameController = TextEditingController();
-
-  final positionController = TextEditingController();
-
-  Future<void> addItem(String? name, String? position) {
-    // Example item data
-    Map<String, dynamic> itemData = {
-      'name': name,
-      'position': position,
-    };
-
-    return itemsCollection.add(itemData);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +34,9 @@ class _AddUserState extends State<AddUser> {
             height: 20,
           ),
           MytextFile(
+              onchanged: (p0) {
+                debugPrint("------> Name: $p0");
+              },
               controller: userNameController,
               hintText: "Name",
               obscursText: false),
@@ -49,27 +44,12 @@ class _AddUserState extends State<AddUser> {
             height: 10,
           ),
           MytextFile(
-              controller: userNameController,
+              onchanged: (p0) {
+                debugPrint("------> Position: $p0");
+              },
+              controller: positioncontroller,
               hintText: "Position",
               obscursText: false),
-          // const Padding(
-          //   padding: EdgeInsets.all(10),
-          //   child: TextField(
-          //     decoration: InputDecoration(
-          //       hintText: "Task Title",
-          //       border: OutlineInputBorder(),
-          //     ),
-          //   ),
-          // ),
-          // const Padding(
-          //   padding: EdgeInsets.all(10),
-          //   child: TextField(
-          //     decoration: InputDecoration(
-          //       hintText: "Task Description",
-          //       border: OutlineInputBorder(),
-          //     ),
-          //   ),
-          // ),
           const SizedBox(
             height: 20,
           ),
@@ -79,6 +59,27 @@ class _AddUserState extends State<AddUser> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 GestureDetector(
+                  onTap: () {
+                    Map<String, dynamic> itemData = {
+                      'name': userNameController.text,
+                      'position': positioncontroller.text,
+                    };
+                    var collection =
+                        FirebaseFirestore.instance.collection('items');
+                    collection
+                        .add(itemData)
+                        .then((_) => {
+                              debugPrint('-------->> Added: $itemData'),
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context) {
+                                  return const HomeScreen();
+                                },
+                              ))
+                            })
+                        .catchError((error) => {
+                              debugPrint('---------->>Add failed: $error'),
+                            });
+                  },
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 10),

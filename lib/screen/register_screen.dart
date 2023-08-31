@@ -112,9 +112,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         const SizedBox(
                           height: 50,
                         ),
-                        const Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
+                          children: const [
                             SquareTitle(imagePath: 'assets/images/apple.png'),
                             SizedBox(
                               width: 25,

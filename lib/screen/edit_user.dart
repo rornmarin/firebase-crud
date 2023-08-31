@@ -1,8 +1,18 @@
-import 'package:firebase_test/components/my_textfile.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_test/screen/homescreen.dart';
 import 'package:flutter/material.dart';
 
+import 'package:firebase_test/components/my_textfile.dart';
+
 class EditUser extends StatelessWidget {
-  EditUser({super.key});
+  final DocumentSnapshot documentSnapshot;
+
+  EditUser({
+    Key? key,
+    required this.documentSnapshot,
+  }) : super(key: key);
 
   final userNameController = TextEditingController();
   final positionController = TextEditingController();
@@ -11,10 +21,12 @@ class EditUser extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green.shade700,
+        iconTheme: const IconThemeData(color: Colors.white),
+        centerTitle: true,
+        backgroundColor: Colors.blue.shade800,
         title: const Text(
           "Edit User",
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
       body: Column(
@@ -23,6 +35,9 @@ class EditUser extends StatelessWidget {
             height: 20,
           ),
           MytextFile(
+              onchanged: (p0) {
+                debugPrint("-------->Update Name: $p0");
+              },
               controller: userNameController,
               hintText: "Name",
               obscursText: false),
@@ -30,7 +45,10 @@ class EditUser extends StatelessWidget {
             height: 10,
           ),
           MytextFile(
-              controller: userNameController,
+              onchanged: (p0) {
+                debugPrint("-------->Update Position: $p0");
+              },
+              controller: positionController,
               hintText: "Position",
               obscursText: false),
           const SizedBox(
@@ -43,14 +61,35 @@ class EditUser extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
-                    color: Colors.green.shade700,
+                    color: Colors.blue.shade700,
                     borderRadius: BorderRadius.circular(8)),
-                child: const Center(
-                  child: Text(
-                    "Update",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
+                child: Center(
+                  child: GestureDetector(
+                    onTap: () {
+                      fireupdate();
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return const HomeScreen();
+                        },
+                      ));
+                    },
+                    child: GestureDetector(
+                      onTap: () async {
+                        await fireupdate();
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) {
+                            return const HomeScreen();
+                          },
+                        ));
+                      },
+                      child: const Text(
+                        "Update",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -60,5 +99,18 @@ class EditUser extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future fireupdate() async {
+    final usercolloction = FirebaseFirestore.instance.collection("items");
+    final docRef = usercolloction.doc(documentSnapshot.id);
+    try {
+      await docRef.update({
+        "name": userNameController.text,
+        "position": positionController.text
+      });
+    } catch (e) {
+      debugPrint("-------erorrr> $e");
+    }
   }
 }
