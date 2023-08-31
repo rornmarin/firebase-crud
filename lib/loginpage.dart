@@ -1,6 +1,7 @@
 import 'package:firebase_test/components/my_textfile.dart';
 import 'package:firebase_test/components/square_title.dart';
-import 'package:firebase_test/homescreen.dart';
+import 'package:firebase_test/screen/homescreen.dart';
+
 import 'package:flutter/material.dart';
 
 import 'components/my_button.dart';

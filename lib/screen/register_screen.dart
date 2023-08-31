@@ -148,7 +148,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 );
                               },
                               child: const Text(
-                                'Register now',
+                                'Login now',
                                 style: TextStyle(color: Colors.blue),
                               ),
                             )
